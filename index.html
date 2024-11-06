@@ -11,14 +11,31 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
-            color: #333;
+            color: #282c35;
         }
 
         header {
-            background-color: #007BFF;
+            background-color: #6c757d;
             color: white;
             padding: 1em;
             text-align: center;
+        }
+
+        nav {
+            background-color: #495057;
+            padding: 0.5em;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 1em;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
         }
 
         section {
@@ -31,11 +48,11 @@
 
         h2,
         h3 {
-            color: #007BFF;
+            color: #6c757d;
         }
 
         a {
-            color: #007BFF;
+            color: #6c757d;
             text-decoration: none;
         }
 
@@ -51,12 +68,30 @@
         <h1>Data Analytics Portfolio</h1>
     </header>
 
-    <section>
+    <nav>
+        <a href="#about">About Me</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#resume">Resume/CV</a>
+        <a href="#contact">Contact Me</a>
+    </nav>
+
+    <section id="about">
         <h2>About Me</h2>
         <p>
             Hello! I'm Dallin Moore, ...
         </p>
+    </section>
 
+    <section id="education">
+        <h2>Education</h2>
+        <p>
+            Bachelor of Science in Data Analytics, Utah State University, May 2025
+        </p>
+    </section>
+
+    <section id="projects">
         <h2>Projects</h2>
         <h3>Project 1: Project Name</h3>
         <p>
@@ -69,10 +104,26 @@
         </p>
 
         <!-- Add more projects as needed -->
+    </section>
 
+    <section id="skills">
+        <h2>Skills</h2>
+        <ul>
+            <li>Data Analysis</li>
+            <li>Machine Learning</li>
+            <li>Python</li>
+            <li>SQL</li>
+            <li>Tableau</li>
+            <!-- Add more skills as needed -->
+        </ul>
+    </section>
+
+    <section id="resume">
         <h2>Resume/CV</h2>
         <p>...</p>
+    </section>
 
+    <section id="contact">
         <h2>Contact Me</h2>
         <p>
             Feel free to reach out to me at <a href="mailto:dallinrmoore@gmail.com">dallinrmoore@gmail.com</a>.
