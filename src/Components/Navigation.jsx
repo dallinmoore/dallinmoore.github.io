@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Navigation.css';
 
-function Navigation() {
-  const items = ['Home', 'About', 'Projects', 'Contact'];
+function Navigation({ items }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const getOffset = (index) => {
@@ -14,6 +13,41 @@ function Navigation() {
       : 80 * distance + (Math.sign(distance) * 60);
     return spacing;
   };
+
+  const getSectionId = (itemName) => {
+    return itemName.toLowerCase().replace(/\s+/g, '');
+  };
+
+  const scrollToSection = (index, itemName) => {
+    setActiveIndex(index);
+    const sectionId = getSectionId(itemName);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Update active section based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = items.map(item => 
+        document.getElementById(getSectionId(item))
+      );
+      
+      const currentSection = sections.findIndex(section => {
+        if (!section) return false;
+        const rect = section.getBoundingClientRect();
+        return rect.top >= -100 && rect.top <= 100;
+      });
+
+      if (currentSection !== -1) {
+        setActiveIndex(currentSection);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [items]);
 
   return (
     <div className="sidebar">
@@ -30,7 +64,7 @@ function Navigation() {
               ? 'nav-item active'
               : 'nav-item below'
           }
-          onClick={() => setActiveIndex(index)}
+          onClick={() => scrollToSection(index, item)}
         >
           {item}
         </div>
