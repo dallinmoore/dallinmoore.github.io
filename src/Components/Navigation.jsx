@@ -6,8 +6,6 @@ function Navigation({ items }) {
 
   const getOffset = (index) => {
     const distance = index - activeIndex;
-    // Reduced primary gap from 200px to 140px
-    // Reduced secondary gap from 120px to 80px
     const spacing = Math.abs(distance) === 1 
       ? 140 * Math.sign(distance)
       : 80 * distance + (Math.sign(distance) * 60);
@@ -27,7 +25,6 @@ function Navigation({ items }) {
     }
   };
 
-  // Update active section based on scroll position
   useEffect(() => {
     const handleScroll = () => {
       const sections = items.map(item => 
@@ -37,17 +34,20 @@ function Navigation({ items }) {
       const currentSection = sections.findIndex(section => {
         if (!section) return false;
         const rect = section.getBoundingClientRect();
-        return rect.top >= -100 && rect.top <= 100;
+        return rect.top >= -window.innerHeight / 2 && rect.top <= window.innerHeight / 2;
       });
 
-      if (currentSection !== -1) {
+      if (currentSection !== -1 && currentSection !== activeIndex) {
         setActiveIndex(currentSection);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [items]);
+    window.addEventListener('wheel', handleScroll);
+
+    return () => {
+      window.removeEventListener('wheel', handleScroll);
+    };
+  }, [items, activeIndex]);
 
   return (
     <div className="sidebar">
