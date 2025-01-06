@@ -17,7 +17,6 @@ function Navigation({ items }) {
   };
 
   const scrollToSection = (index, itemName) => {
-    setActiveIndex(index);
     const sectionId = getSectionId(itemName);
     const element = document.getElementById(sectionId);
     if (element) {
@@ -26,26 +25,40 @@ function Navigation({ items }) {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = items.map(item => 
-        document.getElementById(getSectionId(item))
-      );
-      
-      const currentSection = sections.findIndex(section => {
-        if (!section) return false;
-        const rect = section.getBoundingClientRect();
-        return rect.top >= -window.innerHeight / 2 && rect.top <= window.innerHeight / 2;
-      });
+    const sections = items.map(item => 
+      document.getElementById(getSectionId(item))
+    );
 
-      if (currentSection !== -1 && currentSection !== activeIndex) {
-        setActiveIndex(currentSection);
-      }
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.5 // Adjust this threshold as needed
     };
 
-    window.addEventListener('wheel', handleScroll);
+    const observerCallback = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = sections.indexOf(entry.target);
+          if (index !== -1 && index !== activeIndex) {
+            setActiveIndex(index);
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    sections.forEach(section => {
+      if (section) {
+        observer.observe(section);
+      }
+    });
 
     return () => {
-      window.removeEventListener('wheel', handleScroll);
+      sections.forEach(section => {
+        if (section) {
+          observer.unobserve(section);
+        }
+      });
     };
   }, [items, activeIndex]);
 

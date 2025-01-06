@@ -9,6 +9,13 @@
   height: 100vh;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
+  display: flex;
+  scroll-behavior: smooth;
+}
+
+.main-content {
+  width: 66.67%; 
+  margin-left: 33.33%; 
 }
 
 .card {
