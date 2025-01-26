@@ -11,6 +11,8 @@
   scroll-snap-type: y mandatory;
   display: flex;
   scroll-behavior: smooth;
+  background-color: #2F4550;
+  color: #F4F4F9; 
 }
 
 .main-content {

@@ -32,7 +32,7 @@ function Navigation({ items }) {
     const observerOptions = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.5 // Adjust this threshold as needed
+      threshold: 0.5 // when 50% of the element is visible
     };
 
     const observerCallback = (entries) => {
