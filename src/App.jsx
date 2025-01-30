@@ -14,7 +14,7 @@ function App() {
       <div className="main-content">
         <section id="home" className="App-header">
           <h1>Welcome to My Portfolio!</h1>
-          <p>My name is Dallin Moore and I'm a student studying Data Analytics at Utah State University!</p>
+          <p>My name is Dallin Moore and I'm a student studying Data Analytics at Utah State University! The website is currently under construction but come back later for more content!</p>
         </section>
         <section id="about" className="section">
           <About />
