@@ -18,6 +18,7 @@
 .main-content {
   width: 66.67%; 
   margin-left: 33.33%; 
+  padding: 2rem;
 }
 
 .card {
